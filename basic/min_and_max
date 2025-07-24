@@ -1,0 +1,13 @@
+iList =[1, 423, 6, 46, 34, 23, 13, 53, 4]
+max = iList[0]
+min =iList[0]
+for i in range(len(iList)):
+    if iList[i]<=min:
+        min = iList[i]
+    if iList[i]>=max:
+        max =iList[i]
+sum =max+min
+
+
+print(min,max)
+print(sum)    

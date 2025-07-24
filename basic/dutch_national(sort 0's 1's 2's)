@@ -1,0 +1,55 @@
+#this is better solution kind of brute force
+arr =[0, 1, 2, 0, 1, 2]
+n = len(arr)
+def bettersort(arr):
+    zero,one,two =0,0,0
+    for i in arr:
+        if i==0:
+            zero+=1
+        elif i==1:
+            one+=1
+        elif i==2:
+            two+=1
+
+
+    for j in range(zero):
+        arr[j]=0
+    
+
+    for k in range(zero,zero+one):
+        arr[k]=1
+
+    for l in range(zero+one,n):
+        arr[l]=2
+
+    print(arr)
+
+'''Time Complexity: O(N) + O(N)
+Space complexity = o(1)'''
+
+#######################
+#optimal solution which is based on dutch national flag
+#######################
+# 0 arr[0,low-1]
+ #1 arr[low, mid-1]
+ #2 arr[high+1,n-1]
+ # mid - high
+low =0
+mid =0
+high =n-1
+while mid<=high:
+    if arr[mid]==0:
+        arr[low],arr[mid]= arr[mid],arr[low]
+        low+=1
+        mid+=1
+    elif arr[mid]==1:
+        mid+=1
+    elif arr[mid]==2:
+        arr[mid],arr[high] =arr[high],arr[mid]
+        high-=1
+print(arr)
+
+#Time Complexity: O(N), where N = size of the given array.
+#Reason: We are using a single loop that can run at most N times.
+
+#Space Complexity: O(1) as we are not using any extra space.

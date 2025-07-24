@@ -1,0 +1,26 @@
+str ='dad'
+def palindrome_str(str,i):
+    
+    if i>len(str)/2:
+        return True
+    if str[i] != str[len(str)-i-1]:
+        return False
+    return (str,i+1)
+
+if palindrome_str(str,0):
+    print("palindrome")
+else:
+    print("not a palindrome")
+
+def palindrome_num(num):
+    rev =0
+    org = rev
+    while num!=0:
+        rev = (num%10) + (rev*10)
+    
+    if org == rev:
+        print("palindrome")
+    else:
+        print("not a palindrome")
+
+palindrome_num(11)

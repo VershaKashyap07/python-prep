@@ -1,0 +1,29 @@
+#all the number twice except one find that unique no
+arr = [2,3,2,5,3,4,5]
+N = len(arr)
+
+#based on linear search
+def brute(arr,N):
+    for i in range(N):
+        num = arr[i]
+        count = 0
+        for j in range(N):
+            if arr[j]==num:
+                count+=1
+            
+        if count ==1:
+            return(num)
+        
+print(brute(arr,N))
+
+dict ={}
+for i in arr:
+    if i in dict:
+        dict[i] +=1
+    else:
+        dict[i]=1
+
+
+for key,value in dict.items():
+    if value ==1:
+        print(key)

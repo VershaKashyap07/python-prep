@@ -1,0 +1,30 @@
+str = '123ab56'
+str2 = '123456'
+
+print(str.isdigit())
+print(str2.isdigit())
+print(str.isnumeric())
+print(str2.isnumeric())
+'''# If not all characters are digits, .isdigit() returns False
+>>> '123abc'.isdigit()
+False
+
+# If there's whitespace, .isdigit() returns False
+>>> ' 123'.isdigit()
+False
+
+# If there's decimals, .isdigit() returns False
+>>> '1.23'.isdigit()
+False
+
+Some interesting notes about the Python isdigit method is that it also works with superscripts 
+and with exponents (superscript characters), even when they’re formatted in their unicode versions.
+
+
+That is to say, that the isdigit method checks whether a character is a unicode representation of a digit, 
+while isnumeric method checks if a the character is a unicode representation of a numeric value.'''
+
+my_string = "Programiz"
+my_char = "r"
+
+print(my_string.count(my_char))

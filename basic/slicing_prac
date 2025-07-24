@@ -1,0 +1,22 @@
+mystr  ="learning champion"
+print(mystr[-1:13:-1])
+print(mystr[0:13:1])
+print(mystr[16])
+print(mystr[7:0:-1])
+print(mystr[-2:-3]) #no output
+# Initialize list
+List = ['Geeks', 4, 'geeks !']
+
+# Show original list
+print("Original List:\n", List)
+
+print("\nSliced Lists: ")
+
+# Display sliced list
+print(List[::-1])
+
+# Display sliced list
+print(List[::-3]) #stat from -1 till end with step 0f -3 so only last item 
+
+# Display sliced list
+print(List[:1:-2])

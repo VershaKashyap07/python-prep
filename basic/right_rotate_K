@@ -1,0 +1,64 @@
+arr = [1,2,3,4,5,6,7]
+n=len(arr)
+
+# brute force for one place
+def bruteforceby1(arr):
+    n=len(arr)
+    temp = arr[n-1]
+    
+    for i in range(n-1,0,-1):
+        arr[i]= arr[i-1]
+    
+    arr[0] =temp
+    return arr
+
+
+#bruteforceby1(arr)
+
+    
+###brute force for k place
+
+def bruteforcebyD(arr,k):
+    n=len(arr)
+    k=2
+    k= k% n
+    temp = arr[-k:]
+    print(temp)
+
+    ##shifting
+    for i in range(n - k - 1, -1, -1):
+        arr[i+k] = arr[i] 
+
+    
+    #put temp back
+    for j in range(k):
+        arr[j] = temp[j]
+
+    print(arr)
+
+
+def reverse(arr, start, end):
+    while start < end:
+        arr[start], arr[end] = arr[end], arr[start]
+        start += 1
+        end -= 1
+
+def optimalbyD(arr, k):
+    if k == 0:
+        return arr
+    
+    n = len(arr)
+    k = k % n
+
+    # Reverse the entire array
+    reverse(arr, 0, n - 1)
+    # Reverse the first k elements
+    reverse(arr, 0, k - 1)
+    # Reverse the last n-k elements
+    reverse(arr, k, n - 1)
+    return arr
+
+# Example usage
+
+k = 3
+print(optimalbyD(arr, k))

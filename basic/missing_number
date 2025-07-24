@@ -1,0 +1,47 @@
+arr =[1,2]
+N=2
+
+#based on linear search
+def bruteforce(arr,N):
+    count =0
+    for i in range(1,N+1):
+        flag =0
+        for j in range(0,N-1):
+            if arr[j]==i:
+                flag =1
+                count+=1
+                break
+        if flag==0:
+            return(i)
+
+
+            
+print(bruteforce(arr,N))
+
+
+def Optimal(arr,N):
+    sum1 = N*(N+1)//2
+    sum2 =0
+    for i in arr:
+        sum2+=i
+    return abs(sum1-sum2)
+
+
+      
+print(Optimal(arr,N))
+
+
+def missing(arr,n):
+    xor1 = 0
+    xor2 = 0
+    
+    for i in range(len(arr)):
+        xor2 =  xor2^arr[i]
+        xor1 =  xor1^(i+1)
+        
+    xor1 = xor1^n
+    
+    return xor1^xor2
+        
+    
+print(missing(arr,n))

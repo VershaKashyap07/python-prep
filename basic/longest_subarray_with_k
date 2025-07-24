@@ -1,0 +1,88 @@
+arr  =[2,0,0,3]
+k =3
+n =len(arr)
+
+
+def brute3loop(arr,n,k):
+    maxlen = 0
+    for i in range(n):
+        for j in range(i,n):
+            summ = 0
+            for k in range(i, j+1):
+                summ+=arr[k]
+            if summ==k:
+                maxlen = max(maxlen, j-i+1)
+    return maxlen
+
+print(brute3loop(arr, n,k))
+
+def bruteforce(arr,n,k,maxlen):
+    for i in range(n):
+        sum =0
+        for j in range(i,n):
+            print(arr[i],arr[j])
+            sum+=arr[j]
+            if sum ==k:
+                maxlen =max(maxlen,j-i+1)
+
+    return(maxlen)
+
+
+#this will only for array with positives and zero
+def optimal(arr,n,k):
+    left ,right = 0,0
+    sum =arr[0]
+    maxlen =0
+    while right<n:
+        # if sum > k, reduce the subarray from left
+        # until sum becomes less or equal to k:
+        while left<=right  and sum>k:
+            sum-=arr[left]
+            left+=1
+        # if sum = k, update the maxLen i.e. answer:
+        if sum==k:
+            maxlen =max(maxlen,right-left+1)
+        # Move forward the right pointer:
+        right+=1
+        if right<n:
+            sum+=arr[right]
+
+    return maxlen
+
+
+
+#length = optimal(arr,n,k)
+#print(f"The length of the longest subarray is: {length}")
+            
+
+def optimal_for_negative(arr, n, k):
+    summ, maxlen, length = 0, 0, 0
+    premap = {}
+
+    for i in range(n):
+        summ += arr[i]
+        
+        if summ == k:
+            maxlen = max(maxlen, i + 1)
+        
+        rem = summ - k
+        
+        if rem in premap:
+            length = i - premap[rem]
+            maxlen = max(maxlen, length)
+        
+        if summ not in premap:
+            premap[summ] = i
+
+    return maxlen
+
+# Example usage:
+arr = [1, -1, 5, -2, 3]  # Sample array
+n = len(arr)             # Length of the array
+k = 3                    # Target sum
+print(optimal_for_negative(arr, n, k))  # Output: 4
+
+
+
+
+    

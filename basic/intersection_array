@@ -1,0 +1,32 @@
+arr = [1,2,2,3,3,4,5,6]
+arr2 = [2,3,3,5,6,6,7]
+inter = []
+for i in arr:
+    if i in arr2:
+        if i not in inter:
+            inter.append(i)
+
+
+print(inter)
+
+
+##########################
+# two pointer method
+##########################
+m = len(arr)
+n = len(arr2)
+i, j = 0, 0
+
+while i < m and j < n:
+    if arr[i] < arr2[j]:
+        i += 1
+    elif arr2[j] < arr[i]:
+        j += 1
+    else:
+        if arr[i] not in inter:
+            inter.append(arr[i])
+        i += 1
+        j += 1
+print(inter)
+
+

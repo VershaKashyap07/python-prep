@@ -1,0 +1,99 @@
+class Atm:
+
+    __counter = 0        #static/class variable
+
+    def __init__(self):
+        self.__pin = ""    # private(__data)
+        self.balance = 0
+        self.id = Atm.__counter
+        Atm.__counter+=1
+        
+    @staticmethod              #class method
+    def get_counter():
+        print(Atm.__counter)   
+
+    @staticmethod              #class method
+    def set_counter(new_id):
+        if type(new_id)==int:
+            Atm.__counter = new_id
+        else:
+            print("invalid type")
+
+
+    def get_pin(self): ##get
+        return self.__pin
+    
+    def set_pin(self,new_pin): ## set
+        if type(new_pin)==int:
+            self.__pin = new_pin
+            print("pin changed")
+        else:
+            print("not allowed type")
+        
+    def menu(self):
+        user_input = input("""
+                    How would you like to proceed?
+                    1. Enter 1 to create Pin
+                    2. Enter 2 to deposit
+                    3. Enter 3 to withdrawal
+                    4. Enter 4 to check balance
+                    5. Enter 5 to exit""")
+
+        if user_input == "1":
+            self.create_pin()  # Call a method to handle creating a pin
+        elif user_input == "2":
+            self.deposit()  # Call a method to handle depositing
+        elif user_input == "3":
+            self.withdrawal()  # Call a method to handle withdrawal
+        elif user_input == "4":
+            self.check_balance()  # Call a method to check balance
+        elif user_input == "5":
+            print("Exiting...")
+        else:
+            print("Invalid choice. Please try again.")
+            self.menu()  # Recursive call to display the menu again if the choice is invalid
+
+    def create_pin(self):
+        # Logic for creating a pin
+        self.pin  = input("please create your pin")
+        print("pin is created successfully", self.pin)
+
+    def deposit(self):
+        # Logic for depositing money
+        print("pin is",self.pin)
+        temp =input("please enter the pin")
+        if self.pin ==temp:
+            amount =  int(input("enter the amount"))
+            self.balance = self.balance +amount
+            print("deposit successfull with balance",self.balance)
+        else:
+            print("invalid pin")
+        
+
+    def withdrawal(self):
+        # Logic for withdrawing money
+        temp =input("please enter the pin")
+        if self.pin ==temp:
+            amount =  int(input("enter the amount"))
+            if amount <self.balance:
+                self.balance = self.balance - amount
+                print("successfull with balance",self.balance)
+            else:
+                print("invalid amount")
+        else:
+            print("invalid pin")
+
+    def check_balance(self):
+        # Logic for checking balance
+        temp =input("please enter the pin")
+        if self.pin ==temp:
+            print("balance is",self.balance)
+        else:
+            print("invalid pin")
+
+
+
+a = Atm()
+a.get_counter()
+a.set_counter(23)
+a.get_counter()

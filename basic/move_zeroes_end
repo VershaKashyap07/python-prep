@@ -1,0 +1,53 @@
+arr =[1,0,3,5,0,9]
+
+def brute_force(arr):
+    count =0
+    res =[]
+    for i in arr:
+        if i==0:
+            count+=1
+        else:
+            res.append(i)
+
+    for j in range(count):
+        res.append(0)
+        
+    return res
+print(brute_force(arr))
+
+'''Time Complexity: O(N) + O(X) + O(N-X) ~ O(2*N), where N = total no. of elements,
+X = no. of non-zero elements, and N-X = total no. of zeros.
+Reason: O(N) for copying non-zero elements from the original to the temporary array. 
+O(X) for again copying it back from the temporary to the original array. 
+O(N-X) for filling zeros in the original array. So, the total time complexity will be O(2*N).
+
+Space Complexity: O(N), as we are using a temporary array to solve this problem and the maximum size of the array can be N in the worst case.
+Reason: The temporary array stores the non-zero elements. In the worst case, all the given array elements will be non-zero'''
+def optimal(arr):
+    j =-1
+
+    n =len(arr)
+    for i in range(n):
+        if arr[i] ==0:
+            j=i
+            
+            break
+
+    if j==-1:
+        return arr
+    
+    for i in range(j+1,n):
+        
+        if arr[i]!=0:
+            
+            arr[i],arr[j] = arr[j],arr[i]
+            j+=1
+                
+    return arr
+
+print(optimal(arr))
+
+'''Time Complexity: O(N), N = size of the array.
+Reason: We have used 2 loops and using those loops, we are basically traversing the array once.
+
+Space Complexity: O(1) as we are not using any extra space to solve this problem.'''

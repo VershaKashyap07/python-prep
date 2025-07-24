@@ -1,0 +1,12 @@
+#Print all the duplicate characters in a string
+str ='hello'
+dict ={}
+for i in str:
+    if i in dict:
+        dict[i] +=1
+    else:
+        dict[i]=1
+print(dict)
+for key, value in dict.items():
+    if value > 1:
+        print(key,"count =",value)

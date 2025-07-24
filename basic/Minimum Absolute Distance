@@ -1,0 +1,26 @@
+v = [3, 12, 126, 44, 52, 57, 144, 61, 68, 72, 122]
+
+
+def min_distance(v):
+    sorted_list = sorted(v)
+    if len(sorted_list) < 2:
+        return []
+    min_number = max(sorted_list)-min(sorted_list)
+    
+    #to get the min distance
+    for i in range(1, len(sorted_list)):
+        if sorted_list[i] - sorted_list[i-1] < min_number:
+            min_number = sorted_list[i] - sorted_list[i-1]
+    print(min_number)
+    out_result = []
+    index = 1
+
+    # to get the pairs with min dis
+    while index < len(sorted_list):
+        if sorted_list[index]-sorted_list[index-1] == min_number:
+            out_result.append(
+                [sorted_list[index-1], sorted_list[index]])
+        index += 1
+
+    return out_result
+print(min_distance(v))
