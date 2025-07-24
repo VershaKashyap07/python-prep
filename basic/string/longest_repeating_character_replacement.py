@@ -1,25 +1,37 @@
-def longest_repeating_character_replacement(s, k):
-    max_length = 0
+# Input: s = "ABAB", k = 2
+# Output: 4
+# Explanation: Replace the two 'A's with two 'B's or vice versa.
 
-    # Try all possible replacements within the given limit k
-    for i in range(len(s)):
-        for j in range(i + 1, len(s) + 1):
-            substring = s[i:j]
-            max_count = max(substring.count(char) for char in set(substring))
+# Brute: gen all substring and then find the no of conversions (min)
 
-            # Check if it's possible to make the substring repeating by replacing characters
-            if len(substring) - max_count <= k:
-                max_length = max(max_length, len(substring))
+s = "AABABBA"
+k =1
+max_length = 0
+n = len(s)
 
-    return max_length
+for i in range(n):
+    for j in range(i, n):
+        substring = s[i:j+1]
+    
+        char_count = {}
+        for c in substring:
+            char_count[c] = char_count.get(c,0)+1
+           
+        max_freq =  max(char_count.values())
+        if len(substring) - max_freq <=k:
+            max_length = max(max_length,len(substring))
+            
+            
+print(max_length) 
+            
+# Time Complexity: O(n³) where n is the length of the string:
 
-# Test the function
-s = "ABAB"
-k = 2
-print(longest_repeating_character_replacement(s, k))  # Output: 4
+# O(n²) to generate all substrings
+# O(n) to count characters in each substring
 
+# Space Complexity: O(1) since we only store character frequencies (maximum 26 characters)      
 
-
+##Better
 def opt_longest_repeating_character_replacement(s, k):
     l=0
     count ={}
@@ -43,5 +55,41 @@ s = "ABAB"
 k = 2
 print("opt_longest_repeating_character_replacement",opt_longest_repeating_character_replacement(s, k))  # Output: 4
 
+#Optimal
+
+
+def characterReplacement(s: str, k: int) -> int:
+    if not s:
+        return 0
+        
+    # Initialize character frequency map and variables
+    char_count = {}
+    max_length = 0
+    max_count = 0  # Count of most frequent character in current window
+    left = 0       # Left pointer of sliding window
+    
+    # Iterate through string using right pointer
+    for right in range(len(s)):
+        # Update frequency of current character
+        char_count[s[right]] = char_count.get(s[right], 0) + 1
+        
+        # Update max_count if current character becomes most frequent
+        max_count = max(max_count, char_count[s[right]])
+        
+        # Current window size
+        window_size = right - left + 1
+        
+        # If number of characters to replace exceeds k, shrink window
+        if window_size - max_count > k:
+            # Decrease frequency of character going out of window
+            char_count[s[left]] -= 1
+            left += 1
+        else:
+            # Update max_length if current window is valid
+            max_length = max(max_length, window_size)
+    
+    return max_length
+
+print(characterReplacement(s, k))
 
 
